@@ -1,66 +1,57 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./style.css" />
-    <title>To-Do-List</title>
-  </head>
-  <body>
-    
-      <form class="content happy-form">
-        <div class="content">
-          <label for="input-titulo">Título:</label>
-          <input
-            type="text"
-            id="input-titulo"
-            placeholder="Estudar Angular"
-          />
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="./style.css" />
+  <title>To-Do-List</title>
+</head>
+
+<body>
+  <form class="content happy-form" id="formulario">
+    <div class="content">
+      <label for="input-titulo">Título:</label>
+      <input type="text" id="input-titulo" placeholder="Estudar Angular" />
+    </div>
+    <div class="content">
+      <label for="input-descricao">Descrição:</label>
+      <input type="text" id="input-descricao" placeholder="two way data biding" />
+    </div>
+    <div class="content">
+      <label for="input-data">Data:</label>
+      <input type="date" id="input-data" />
+    </div>
+    <button id="btn-new-task">Criar</button>
+  </form>
+  <div class="content--body">
+    <ul id="to-do-list">
+      <li class="card">
+        <div class="data">
+          <h2>13/08</h2>
         </div>
-        <div class="content">
-            <label for="input-descricao">Descrição:</label>
-            <input
-              type="text"
-              id="input-descricao"
-              placeholder="two way data biding"
-            />
-          </div>
-          <div class="content">
-            <label for="input-data">Data:</label>
-            <input
-              type="date"
-              id="input-data"
-            />
-          </div>
-        <button type="button"  id="btn-new-task">Criar</button>
-      </form>
-      <div class="content--body">
-        <ul id="to-do-list">
-          <li class="card">
-            <div class="data">
-              <h2>13/08</h2>
-            </div>
-            <div class="texto">
-              <h1>testando</h1>
-              <p>
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                Corrupti tenetur dolores tempore impedit exercitationem
-                inventore numquam quidem laboriosam officia est, fugiat ratione
-                distinctio obcaecati voluptatum eaque beatae voluptas ea
-                suscipit.
-              </p>
-            </div>
-            <div class="botoes">
-              <button>
-                <img src="./assets/checked_icon.png" alt="botão de checar" />
-              </button>
-              <button>
-                <img src="./assets/trash_icon.png" alt="botão de excluir" />
-              </button>
-            </div>
-          </li>
-        </ul>
-      </div>
-    <script src="./to-do-list-project.js"></script>
-  </body>
+        <div class="texto">
+          <h1>testando</h1>
+          <p>
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+            Corrupti tenetur dolores tempore impedit exercitationem
+            inventore numquam quidem laboriosam officia est, fugiat ratione
+            distinctio obcaecati voluptatum eaque beatae voluptas ea
+            suscipit.
+          </p>
+        </div>
+        <div class="botoes">
+          <button>
+            <img src="./assets/checked_icon.png" alt="botão de checar" />
+          </button>
+          <button>
+            <img src="./assets/trash_icon.png" alt="botão de excluir" />
+          </button>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <script src="./to-do-list-project.js"></script>
+</body>
+
 </html>

@@ -50,7 +50,6 @@ let lista_tarefas = [
 
 // Variaveis
 const adiciona = document.querySelector("#input-new-task");
-const botao_adicionar = document.querySelector("#btn-new-task");
 
 const lista_cards = document.querySelector("#to-do-list");
 
@@ -101,6 +100,8 @@ function ler() {
 
 }
 
-botao_adicionar.addEventListener("click",() =>{
+const formulario = document.querySelector('#formulario');
+formulario.addEventListener("submit",(event) => {
+    event.preventDefault();
     ler();
 })
