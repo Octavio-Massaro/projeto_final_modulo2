@@ -54,6 +54,8 @@ const adiciona = document.querySelector("#input-new-task");
 const lista_cards = document.querySelector("#to-do-list");
 
 function ler() {
+    const tituloItem = document.querySelector('#input-titulo').value;
+
     const li = document.createElement("li");
     lista_cards.appendChild(li);
     li.classList.add("card");
