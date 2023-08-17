@@ -16,7 +16,7 @@ const lista_tarefas = [
   },
 ];
 
-criaListaTarefas();
+criaListaTarefas(); // cria as tarefas iniciais (a lista inicial estática acima)
 
 function criaListaTarefas() {
   const ulCards = document.querySelector("#to-do-list"); 
@@ -97,8 +97,6 @@ function adicionarTarefa(titulo, descricao, data, id) {
   lista_tarefas.push(item);
   criaListaTarefas();
 }
-
-
 
 const formulario = document.querySelector('#formulario');
 formulario.addEventListener("submit", (event) => {
