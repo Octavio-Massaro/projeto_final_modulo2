@@ -1,114 +1,104 @@
-// var id = 0;
-
-let lista_tarefas = [
+// escopo global
+const lista_tarefas = [
   {
     id: 0,
-    titulo: "tes1",
-    data: "teste1",
-    descricao: "teste1",
-    status: "teste11",
+    titulo: "Angular",
+    data: "21/08",
+    descricao: "Fazer projeto final",
+    concluido: false,
   },
-
   {
     id: 2,
-    titulo: "",
-    data: "",
-    descricao: "",
-    status: "",
+    titulo: "Angular",
+    data: "21/08",
+    descricao: "Fazer projeto individual",
+    concluido: true,
   },
 ];
 
-// var novo_item = {
-//         id,
-//         titulo: "",
-//         data:"",
-//         descricao:"",
-//         status:"",
-//       }
+criaListaTarefas();
 
+function criaListaTarefas() {
+  const ulCards = document.querySelector("#to-do-list"); 
+  ulCards.innerHTML = ""; // limpa todos os itens da to-do list atuais
 
-// function adicionar(entrada,lista_tarefas) {
-//     lista_tarefas.push({...entrada,id});
-//     id++;
-// }
+  // cria novamente todos os itens que estão dentro de lista_tarefas
+  lista_tarefas.forEach(({ id, data, titulo, descricao, concluido }) => {
+    const li = document.createElement("li");
+    li.classList.add("card");
+    ulCards.appendChild(li);
 
-// function remover() {
+    const div_data = document.createElement("div");
+    div_data.classList.add("data");
+    li.appendChild(div_data);
 
-// }
+    const h2_data = document.createElement("h2");
+    h2_data.innerText = data;
+    div_data.appendChild(h2_data);
 
-// let parar = false;
-// while(true){
-//     if(parar){
-//         break;
-//}
+    const div_texto = document.createElement("div");
+    div_texto.classList.add("texto");
+    concluido ? div_texto.classList.add("concluido") : '';
+    li.appendChild(div_texto);
 
-// adicionar(novo_item,lista_tarefas);
-// console.log(lista_tarefas);
-// adicionar(novo_item,lista_tarefas);
-// console.log(lista_tarefas);
-// }
+    const h1 = document.createElement("h1");
+    h1.innerText = titulo;
+    div_texto.appendChild(h1);
 
-// Variaveis
-// const adiciona = document.querySelector("#input-new-task");
+    const p = document.createElement("p");
+    p.innerText = descricao + ' - #' + id;
+    div_texto.appendChild(p);
 
+    const div_btn = document.createElement("div");
+    div_btn.classList.add("botoes");
+    li.appendChild(div_btn);
 
-function concluirTarefa(itemDom) {
-  itemDom.classList.toggle("concluido");
+    const btn_check = document.createElement("button");
+    btn_check.classList.add("btn-done");
+    btn_check.addEventListener("click", () => concluirTarefa(id));
+    div_btn.appendChild(btn_check);
+
+    const img_check = document.createElement("img");
+    img_check.src = "./assets/checked_icon.png";
+    btn_check.appendChild(img_check);
+
+    const btn_excluir = document.createElement("button");
+    btn_excluir.classList.add("btn-delete");
+    btn_excluir.addEventListener("click", () => excluirTarefa(id));
+    div_btn.appendChild(btn_excluir);
+
+    const img_excluir = document.createElement("img");
+    img_excluir.src = "./assets/trash_icon.png";
+    btn_excluir.appendChild(img_excluir);
+  });
 }
 
-function excluirTarefa(itemDom) {
-  itemDom.parentNode.removeChild(itemDom);
+function concluirTarefa(id) {
+  const index = lista_tarefas.findIndex(item => item.id === id);
+  lista_tarefas[index].concluido = !lista_tarefas[index].concluido;
+  criaListaTarefas();
 }
 
-function criarTarefa(tituloItem, descricaoItem, dataItem) {
-  const lista_cards = document.querySelector("#to-do-list");
-
-  const li = document.createElement("li");
-  li.classList.add("card");
-  lista_cards.appendChild(li);
-
-  const div_data = document.createElement("div");
-  div_data.classList.add("data");
-  li.appendChild(div_data);
-
-  const h2_data = document.createElement("h2");
-  h2_data.innerText = dataItem;
-  div_data.appendChild(h2_data);
-
-  const div_texto = document.createElement("div");
-  div_texto.classList.add("texto");
-  li.appendChild(div_texto);
-  
-  const h1 = document.createElement("h1");
-  h1.innerText = tituloItem;
-  div_texto.appendChild(h1);
-  
-  const p = document.createElement("p");
-  p.innerText = descricaoItem;
-  div_texto.appendChild(p);
-
-  const div_btn = document.createElement("div");
-  div_btn.classList.add("botoes");
-  li.appendChild(div_btn);
-
-  const btn_check = document.createElement("button");
-  btn_check.classList.add("btn-done");
-  btn_check.addEventListener("click", () => concluirTarefa(div_texto));
-  div_btn.appendChild(btn_check);
-
-  const img_check = document.createElement("img");
-  img_check.src = "./assets/checked_icon.png";
-  btn_check.appendChild(img_check);
-
-  const btn_excluir = document.createElement("button");
-  btn_excluir.classList.add("btn-delete");
-  btn_excluir.addEventListener("click", () => excluirTarefa(li));
-  div_btn.appendChild(btn_excluir);
-
-  const img_excluir = document.createElement("img");
-  img_excluir.src = "./assets/trash_icon.png";
-  btn_excluir.appendChild(img_excluir);
+function excluirTarefa(id) {
+  // itemDom.parentNode.removeChild(itemDom);
+  const index = lista_tarefas.findIndex(item => item.id === id);
+  lista_tarefas.splice(index,1);
+  criaListaTarefas();
 }
+
+function adicionarTarefa(titulo, descricao, data, id) {
+  const item = {
+    id,
+    titulo,
+    data,
+    descricao,
+    concluido: false,
+  };
+  lista_tarefas.push(item);
+  criaListaTarefas();
+}
+
+
 
 const formulario = document.querySelector('#formulario');
 formulario.addEventListener("submit", (event) => {
@@ -119,7 +109,8 @@ formulario.addEventListener("submit", (event) => {
   const descricaoItem = document.querySelector('#input-descricao').value;
   let dataItem = document.querySelector('#input-data').value.split("-");
   dataItem = `${dataItem[2]}/${dataItem[1]}`
+  const id = Math.max(...lista_tarefas.map(item => item.id)) + 1;
 
-  criarTarefa(tituloItem, descricaoItem, dataItem);
+  adicionarTarefa(tituloItem, descricaoItem, dataItem, id);
   formulario.reset();
 });
