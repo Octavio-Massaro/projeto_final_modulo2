@@ -40,7 +40,7 @@ let lista_tarefas = [
 // while(true){
 //     if(parar){
 //         break;
-//     }
+//}
 
 // adicionar(novo_item,lista_tarefas);
 // console.log(lista_tarefas);
@@ -53,8 +53,20 @@ const adiciona = document.querySelector("#input-new-task");
 
 const lista_cards = document.querySelector("#to-do-list");
 
-function ler() {
-    const tituloItem = document.querySelector('#input-titulo').value;
+function concluirTarefa(itemDom) {
+  itemDom.classList.toggle("concluido");
+}
+
+function excluirTarefa(itemDom) {
+  itemDom.parentNode.removeChild(itemDom);
+}
+
+function criarTarefa() {
+  const tituloItem = document.querySelector('#input-titulo');
+  const descricaoItem = document.querySelector('#input-descricao');
+  const dataItem = document.querySelector('#input-data');
+  let dataFormat = dataItem.value.split("-");
+  dataFormat = `${dataFormat[2]}/${dataFormat[1]}`
 
     const li = document.createElement("li");
     lista_cards.appendChild(li);
@@ -65,7 +77,7 @@ function ler() {
     li.appendChild(div_data);
 
     const h2_data = document.createElement("h2");
-    h2_data.innerText = "10/08"; 
+    h2_data.innerText = dataFormat; 
     div_data.appendChild(h2_data);
 
     const div_texto = document.createElement("div");
@@ -73,11 +85,11 @@ function ler() {
     li.appendChild(div_texto);
 
     const h1 = document.createElement("h1");
-    h1.innerText = "teste";
+    h1.innerText = tituloItem.value;
     div_texto.appendChild(h1);
 
     const p = document.createElement("p");
-    p.innerText = "teste";
+    p.innerText = descricaoItem.value;
     div_texto.appendChild(p);
 
     const div_btn = document.createElement("div");
@@ -86,6 +98,9 @@ function ler() {
     
     const btn_check = document.createElement("button");
     btn_check.classList.add("btn-done");
+    btn_check.addEventListener("click", () =>{
+      concluirTarefa(div_texto)
+    })
     div_btn.appendChild(btn_check);
 
     const img_check = document.createElement("img");
@@ -94,16 +109,25 @@ function ler() {
 
     const btn_excluir = document.createElement("button");
     btn_excluir.classList.add("btn-delete");
+    btn_excluir.addEventListener("click", () =>{
+      excluirTarefa(li);
+    })
     div_btn.appendChild(btn_excluir);
 
     const img_excluir = document.createElement("img");
     img_excluir.src = "./assets/trash_icon.png"
     btn_excluir.appendChild(img_excluir);
 
+    dataItem.value = "";
+    descricaoItem.value = "";
+    tituloItem.value = "";
+
+    const botoesCheck = document.querySelectorAll(".btn-done");
+    console.log(botoesCheck);
 }
 
 const formulario = document.querySelector('#formulario');
 formulario.addEventListener("submit",(event) => {
     event.preventDefault();
-    ler();
+    criarTarefa();
 })
