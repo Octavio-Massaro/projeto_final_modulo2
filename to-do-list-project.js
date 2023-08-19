@@ -1,29 +1,32 @@
 // escopo global
 const lista_tarefas = [
-  {
-    id: 0,
-    titulo: "Angular",
-    data: "21/08",
-    descricao: "Fazer projeto final",
-    concluido: false,
-  },
-  {
-    id: 2,
-    titulo: "Angular",
-    data: "21/08",
-    descricao: "Fazer projeto individual",
-    concluido: true,
-  },
+  // {
+  //   id: 0,
+  //   titulo: "Angular",
+  //   data: "21/08",
+  //   descricao: "Fazer projeto final",
+  //   concluido: false,
+  // },
+  // {
+  //   id: 2,
+  //   titulo: "2ngular",
+  //   data: "21/08",
+  //   descricao: "Fazer projeto individual",
+  //   concluido: true,
+  // },
 ];
 
 criaListaTarefas(); // cria as tarefas iniciais (a lista inicial estática acima)
 
 function criaListaTarefas() {
-  const ulCards = document.querySelector("#to-do-list"); 
+  const filterInput = document.querySelector("#search-bar");
+  const listaFiltrada = lista_tarefas.filter(item => item.titulo.includes(filterInput.value))
+  const ulCards = document.querySelector("#to-do-list");
   ulCards.innerHTML = ""; // limpa todos os itens da to-do list atuais
 
   // cria novamente todos os itens que estão dentro de lista_tarefas
-  lista_tarefas.forEach(({ id, data, titulo, descricao, concluido }) => {
+
+    listaFiltrada.forEach(({ id, data, titulo, descricao, concluido }) => {
     const li = document.createElement("li");
     li.classList.add("card");
     ulCards.appendChild(li);
@@ -107,8 +110,11 @@ formulario.addEventListener("submit", (event) => {
   const descricaoItem = document.querySelector('#input-descricao').value;
   let dataItem = document.querySelector('#input-data').value.split("-");
   dataItem = `${dataItem[2]}/${dataItem[1]}`
-  const id = Math.max(...lista_tarefas.map(item => item.id)) + 1;
+  const id = lista_tarefas.length === 0 ? 0:Math.max(...lista_tarefas.map(item => item.id)) + 1;
 
   adicionarTarefa(tituloItem, descricaoItem, dataItem, id);
   formulario.reset();
 });
+
+const filterInput = document.querySelector("#search-bar");
+filterInput.addEventListener("input", criaListaTarefas);

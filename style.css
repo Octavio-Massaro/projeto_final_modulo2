@@ -21,6 +21,9 @@ body {
     --color-green: #A6F750;
     --color-green2: #33951a;
     --color-red: rgb(146,22,17);
+    --space-xs: .5rem;
+    --space-s: 1rem;
+    
  }
  
  body{
@@ -83,6 +86,22 @@ body {
     gap: 1rem;
     text-align: justify;
     
+ }
+
+ .search{
+   display: flex;
+
+ }
+
+ .search label svg{
+   padding: .5rem;
+   width: 2.5rem;
+ }
+
+ .search input{
+   width: 20rem;
+   padding: 1rem;
+   font-size: 1.2rem;
  }
 
  .card{
