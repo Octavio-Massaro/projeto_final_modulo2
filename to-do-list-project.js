@@ -1,12 +1,12 @@
 // escopo global
 const lista_tarefas = [
-  // {
-  //   id: 0,
-  //   titulo: "Angular",
-  //   data: "21/08",
-  //   descricao: "Fazer projeto final",
-  //   concluido: false,
-  // },
+  {
+    id: 0,
+    titulo: "Angular",
+    data: "21/08",
+    descricao: "Fazer projeto final",
+    concluido: false,
+  },
   // {
   //   id: 2,
   //   titulo: "2ngular",
@@ -20,13 +20,15 @@ criaListaTarefas(); // cria as tarefas iniciais (a lista inicial estática acima
 
 function criaListaTarefas() {
   const filterInput = document.querySelector("#search-bar");
-  const listaFiltrada = lista_tarefas.filter(item => item.titulo.includes(filterInput.value))
+  const listaFiltrada = lista_tarefas.filter((item) =>
+    item.titulo.includes(filterInput.value)
+  );
   const ulCards = document.querySelector("#to-do-list");
   ulCards.innerHTML = ""; // limpa todos os itens da to-do list atuais
 
   // cria novamente todos os itens que estão dentro de lista_tarefas
 
-    listaFiltrada.forEach(({ id, data, titulo, descricao, concluido }) => {
+  listaFiltrada.forEach(({ id, data, titulo, descricao, concluido }) => {
     const li = document.createElement("li");
     li.classList.add("card");
     ulCards.appendChild(li);
@@ -41,16 +43,46 @@ function criaListaTarefas() {
 
     const div_texto = document.createElement("div");
     div_texto.classList.add("texto");
-    concluido ? div_texto.classList.add("concluido") : '';
+    concluido ? div_texto.classList.add("concluido") : "";
     li.appendChild(div_texto);
 
     const h1 = document.createElement("h1");
     h1.innerText = titulo;
     div_texto.appendChild(h1);
 
+    h1.addEventListener("click", () => {
+      const inputTitulo = document.createElement("input");
+      inputTitulo.type = "text";
+      inputTitulo.value = titulo;
+      div_texto.replaceChild(inputTitulo, h1);
+
+      inputTitulo.focus();
+
+      inputTitulo.addEventListener("blur", () => {
+        const novoTitulo = inputTitulo.value;
+        lista_tarefas.find((item) => item.id === id).titulo = novoTitulo;
+        criaListaTarefas();
+      });
+    });
+
     const p = document.createElement("p");
-    p.innerText = descricao + ' - #' + id;
+    p.innerText = descricao;
     div_texto.appendChild(p);
+
+    p.addEventListener("click", () => {
+      const inputP = document.createElement("input");
+      inputP.type = "text";
+      inputP.value = descricao;
+      div_texto.replaceChild(inputP, p);
+
+      inputP.focus();
+
+      inputP.addEventListener("blur", () => {
+        const novoP = inputP.value;
+        lista_tarefas.find((item) => item.id === id).descricao = novoP;
+        criaListaTarefas();
+      });
+    });
 
     const div_btn = document.createElement("div");
     div_btn.classList.add("botoes");
@@ -77,15 +109,15 @@ function criaListaTarefas() {
 }
 
 function concluirTarefa(id) {
-  const index = lista_tarefas.findIndex(item => item.id === id);
+  const index = lista_tarefas.findIndex((item) => item.id === id);
   lista_tarefas[index].concluido = !lista_tarefas[index].concluido;
   criaListaTarefas();
 }
 
 function excluirTarefa(id) {
   // itemDom.parentNode.removeChild(itemDom);
-  const index = lista_tarefas.findIndex(item => item.id === id);
-  lista_tarefas.splice(index,1);
+  const index = lista_tarefas.findIndex((item) => item.id === id);
+  lista_tarefas.splice(index, 1);
   criaListaTarefas();
 }
 
@@ -101,16 +133,19 @@ function adicionarTarefa(titulo, descricao, data, id) {
   criaListaTarefas();
 }
 
-const formulario = document.querySelector('#formulario');
+const formulario = document.querySelector("#formulario");
 formulario.addEventListener("submit", (event) => {
   event.preventDefault();
 
   // Dados formulário
-  const tituloItem = document.querySelector('#input-titulo').value;
-  const descricaoItem = document.querySelector('#input-descricao').value;
-  let dataItem = document.querySelector('#input-data').value.split("-");
-  dataItem = `${dataItem[2]}/${dataItem[1]}`
-  const id = lista_tarefas.length === 0 ? 0:Math.max(...lista_tarefas.map(item => item.id)) + 1;
+  const tituloItem = document.querySelector("#input-titulo").value;
+  const descricaoItem = document.querySelector("#input-descricao").value;
+  let dataItem = document.querySelector("#input-data").value.split("-");
+  dataItem = `${dataItem[2]}/${dataItem[1]}`;
+  const id =
+    lista_tarefas.length === 0
+      ? 0
+      : Math.max(...lista_tarefas.map((item) => item.id)) + 1;
 
   adicionarTarefa(tituloItem, descricaoItem, dataItem, id);
   formulario.reset();
