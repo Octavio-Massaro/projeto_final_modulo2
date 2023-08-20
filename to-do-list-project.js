@@ -58,10 +58,12 @@ function criaListaTarefas() {
 
       inputTitulo.focus();
 
-      inputTitulo.addEventListener("blur", () => {
-        const novoTitulo = inputTitulo.value;
-        lista_tarefas.find((item) => item.id === id).titulo = novoTitulo;
-        criaListaTarefas();
+      inputTitulo.addEventListener("keydown", (tecla) => {
+        if (tecla.key === "Enter") {
+          const novoTitulo = inputTitulo.value;
+          lista_tarefas.find((item) => item.id === id).titulo = novoTitulo;
+          criaListaTarefas();
+        }
       });
     });
 
@@ -77,10 +79,12 @@ function criaListaTarefas() {
 
       inputP.focus();
 
-      inputP.addEventListener("blur", () => {
-        const novoP = inputP.value;
-        lista_tarefas.find((item) => item.id === id).descricao = novoP;
-        criaListaTarefas();
+      inputP.addEventListener("keydown", (tecla) => {
+        if (tecla.key === "Enter") {
+          const novoP = inputP.value;
+          lista_tarefas.find((item) => item.id === id).descricao = novoP;
+          criaListaTarefas();
+        }
       });
     });
 
