@@ -50,47 +50,87 @@ function criaListaTarefas() {
     h1.innerText = titulo;
     div_texto.appendChild(h1);
 
-    h1.addEventListener("click", () => {
-      const inputTitulo = document.createElement("input");
-      inputTitulo.type = "text";
-      inputTitulo.value = titulo;
-      div_texto.replaceChild(inputTitulo, h1);
-
-      inputTitulo.focus();
-
-      inputTitulo.addEventListener("keydown", (tecla) => {
-        if (tecla.key === "Enter") {
-          const novoTitulo = inputTitulo.value;
-          lista_tarefas.find((item) => item.id === id).titulo = novoTitulo;
-          criaListaTarefas();
-        }
-      });
-    });
+    // h1.addEventListener("click", editarTitulo);
+    // function editarTitulo() {
+    //   const inputTitulo = document.createElement("input");
+    //   inputTitulo.type = "text";
+    //   inputTitulo.value = titulo;
+    //   inputTitulo.classList.add("inputEditTitulo");
+    //   div_texto.replaceChild(inputTitulo, h1);
+    //   inputTitulo.focus();
+    //   inputTitulo.addEventListener("keydown", (tecla) => {
+    //     if (tecla.key === "Enter") {
+    //       const novoTitulo = inputTitulo.value;
+    //       lista_tarefas.find((item) => item.id === id).titulo = novoTitulo;
+    //       criaListaTarefas();
+    //     }
+    //   });
+    // }
 
     const p = document.createElement("p");
     p.innerText = descricao;
     div_texto.appendChild(p);
 
-    p.addEventListener("click", () => {
-      const inputP = document.createElement("input");
-      inputP.type = "text";
-      inputP.value = descricao;
-      div_texto.replaceChild(inputP, p);
+    // p.addEventListener("click", editarDescricao);
 
-      inputP.focus();
+    // function editarDescricao() {
+    //   const inputP = document.createElement("input");
+    //   inputP.type = "text";
+    //   inputP.value = descricao;
+    //   inputP.classList.add("inputEditP");
+    //   div_texto.replaceChild(inputP, p);
 
-      inputP.addEventListener("keydown", (tecla) => {
-        if (tecla.key === "Enter") {
-          const novoP = inputP.value;
-          lista_tarefas.find((item) => item.id === id).descricao = novoP;
-          criaListaTarefas();
-        }
-      });
-    });
+    //   inputP.focus();
+
+    //   inputP.addEventListener("keydown", (tecla) => {
+    //     if (tecla.key === "Enter") {
+    //       const novoP = inputP.value;
+    //       lista_tarefas.find((item) => item.id === id).descricao = novoP;
+    //       criaListaTarefas();
+    //     }
+    //   });
+    // }
 
     const div_btn = document.createElement("div");
     div_btn.classList.add("botoes");
     li.appendChild(div_btn);
+
+    const btn_editar = document.createElement("button");
+    btn_editar.classList.add("btn-edit");
+    btn_editar.addEventListener("click", () => {
+      const inputTitulo = document.createElement("input");
+      inputTitulo.type = "text";
+      inputTitulo.maxLength = "30";
+      inputTitulo.value = titulo;
+      inputTitulo.classList.add("inputEditTitulo");
+      div_texto.replaceChild(inputTitulo, h1);
+
+      inputTitulo.focus();
+
+      const inputP = document.createElement("input");
+      inputP.type = "text";
+      inputP.maxLength = "100";
+      inputP.value = descricao;
+      inputP.classList.add("inputEditP");
+      div_texto.replaceChild(inputP, p);
+
+      window.addEventListener("keydown", (tecla) => {
+        if (tecla.key === "Enter") {
+          const novoTitulo = inputTitulo.value;
+          lista_tarefas.find((item) => item.id === id).titulo = novoTitulo;
+
+          const novoP = inputP.value;
+          lista_tarefas.find((item) => item.id === id).descricao = novoP;
+
+          criaListaTarefas();
+        }
+      });
+    });
+    div_btn.appendChild(btn_editar);
+
+    const img_editar = document.createElement("img");
+    img_editar.src = "./assets/pencil_icon.png";
+    btn_editar.appendChild(img_editar);
 
     const btn_check = document.createElement("button");
     btn_check.classList.add("btn-done");

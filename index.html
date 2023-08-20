@@ -1,40 +1,63 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
+    <title>To-Do-List</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="./style.css" />
-  <title>To-Do-List</title>
-</head>
-
-<body>
-  <form class="content happy-form" id="formulario">
-    <div class="content">
-      <label for="input-titulo">Título:</label>
-      <input type="text" id="input-titulo" placeholder="Estudar Angular" required/>
-    </div>
-    <div class="content">
-      <label for="input-descricao">Descrição:</label>
-      <input type="text" id="input-descricao" placeholder="two way data biding" required />
-    </div>
-    <div class="content">
-      <label for="input-data">Data:</label>
-      <input type="date" id="input-data" required />
-    </div>
-    <button id="btn-new-task">Criar</button>
-  </form>
+  <body>
+    <form class="content happy-form" id="formulario">
+      <div class="content">
+        <label for="input-titulo">Título:</label>
+        <input
+          type="text"
+          id="input-titulo"
+          placeholder="Estudar Angular"
+          maxlength="30"
+          required
+        />
+      </div>
+      <div class="content">
+        <label for="input-descricao">Descrição:</label>
+        <input
+          type="text"
+          id="input-descricao"
+          placeholder="two way data biding"
+          maxlength="100"
+          required
+        />
+      </div>
+      <div class="content">
+        <label for="input-data">Data:</label>
+        <input type="date" id="input-data" required />
+      </div>
+      <button id="btn-new-task">Criar</button>
+    </form>
 
     <div class="search">
-      <input type="search" id="search-bar" placeholder="Pesquise a tarefa pelo titulo">
-      <label for="search-bar" id="label-bar"><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-      </svg></label>
+      <input
+        type="search"
+        id="search-bar"
+        placeholder="Pesquise a tarefa pelo titulo"
+      />
+      <label for="search-bar" id="label-bar"
+        ><svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="currentColor"
+          class="bi bi-search"
+          viewBox="0 0 16 16"
+        >
+          <path
+            d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"
+          /></svg
+      ></label>
     </div>
 
-  <div class="content--body">
-    <ul id="to-do-list">
-      <!-- <li class="card">
+    <div class="content--body">
+      <ul id="to-do-list">
+        <!-- <li class="card">
         <div class="data">
           <h2>13/08</h2>
         </div>
@@ -55,11 +78,11 @@
           <button>
             <img src="./assets/trash_icon.png" alt="botão de excluir" />
           </button>
+          
         </div>
       </li> -->
-    </ul>
-  </div>
-  <script src="./to-do-list-project.js" type="module"></script>
-</body>
-
+      </ul>
+    </div>
+    <script src="./to-do-list-project.js" type="module"></script>
+  </body>
 </html>
