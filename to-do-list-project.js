@@ -1,18 +1,11 @@
 // escopo global
 const lista_tarefas = [
-  {
-    id: 0,
-    titulo: "Angular",
-    data: "21/08",
-    descricao: "Fazer projeto final",
-    concluido: false,
-  },
   // {
-  //   id: 2,
-  //   titulo: "2ngular",
+  //   id: 0,
+  //   titulo: "Angular",
   //   data: "21/08",
-  //   descricao: "Fazer projeto individual",
-  //   concluido: true,
+  //   descricao: "Fazer projeto final",
+  //   concluido: false,
   // },
 ];
 
@@ -48,46 +41,9 @@ function criaListaTarefas() {
     h1.innerText = titulo;
     div_texto.appendChild(h1);
 
-    // h1.addEventListener("click", editarTitulo);
-    // function editarTitulo() {
-    //   const inputTitulo = document.createElement("input");
-    //   inputTitulo.type = "text";
-    //   inputTitulo.value = titulo;
-    //   inputTitulo.classList.add("inputEditTitulo");
-    //   div_texto.replaceChild(inputTitulo, h1);
-    //   inputTitulo.focus();
-    //   inputTitulo.addEventListener("keydown", (tecla) => {
-    //     if (tecla.key === "Enter") {
-    //       const novoTitulo = inputTitulo.value;
-    //       lista_tarefas.find((item) => item.id === id).titulo = novoTitulo;
-    //       criaListaTarefas();
-    //     }
-    //   });
-    // }
-
     const p = document.createElement("p");
     p.innerText = descricao;
     div_texto.appendChild(p);
-
-    // p.addEventListener("click", editarDescricao);
-
-    // function editarDescricao() {
-    //   const inputP = document.createElement("input");
-    //   inputP.type = "text";
-    //   inputP.value = descricao;
-    //   inputP.classList.add("inputEditP");
-    //   div_texto.replaceChild(inputP, p);
-
-    //   inputP.focus();
-
-    //   inputP.addEventListener("keydown", (tecla) => {
-    //     if (tecla.key === "Enter") {
-    //       const novoP = inputP.value;
-    //       lista_tarefas.find((item) => item.id === id).descricao = novoP;
-    //       criaListaTarefas();
-    //     }
-    //   });
-    // }
 
     const div_btn = document.createElement("div");
     div_btn.classList.add("botoes");
