@@ -19,15 +19,13 @@ const lista_tarefas = [
 criaListaTarefas(); // cria as tarefas iniciais (a lista inicial estática acima)
 
 function criaListaTarefas() {
-  const filterInput = document.querySelector("#search-bar");
-  const listaFiltrada = lista_tarefas.filter((item) =>
-    item.titulo.includes(filterInput.value)
-  );
   const ulCards = document.querySelector("#to-do-list");
   ulCards.innerHTML = ""; // limpa todos os itens da to-do list atuais
 
-  // cria novamente todos os itens que estão dentro de lista_tarefas
+  const filterInput = document.querySelector("#search-bar");
+  const listaFiltrada = filtrarListaTarefas(filterInput.value);
 
+  // cria novamente todos os itens que estão dentro de lista_tarefas
   listaFiltrada.forEach(({ id, data, titulo, descricao, concluido }) => {
     const li = document.createElement("li");
     li.classList.add("card");
@@ -117,12 +115,9 @@ function criaListaTarefas() {
       window.addEventListener("keydown", (tecla) => {
         if (tecla.key === "Enter") {
           const novoTitulo = inputTitulo.value;
-          lista_tarefas.find((item) => item.id === id).titulo = novoTitulo;
-
           const novoP = inputP.value;
-          lista_tarefas.find((item) => item.id === id).descricao = novoP;
 
-          criaListaTarefas();
+          editarTarefa(novoTitulo, novoP, id);
         }
       });
     });
@@ -152,14 +147,19 @@ function criaListaTarefas() {
   });
 }
 
+function filtrarListaTarefas(texto) {
+  return lista_tarefas.filter((item) =>
+    item.titulo.includes(texto)
+  );
+}
+
 function concluirTarefa(id) {
-  const index = lista_tarefas.findIndex((item) => item.id === id);
-  lista_tarefas[index].concluido = !lista_tarefas[index].concluido;
+  const itemConcluido = lista_tarefas.find((item) => item.id === id);
+  itemConcluido.concluido = !itemConcluido.concluido;
   criaListaTarefas();
 }
 
 function excluirTarefa(id) {
-  // itemDom.parentNode.removeChild(itemDom);
   const index = lista_tarefas.findIndex((item) => item.id === id);
   lista_tarefas.splice(index, 1);
   criaListaTarefas();
@@ -176,6 +176,16 @@ function adicionarTarefa(titulo, descricao, data, id) {
   lista_tarefas.push(item);
   criaListaTarefas();
 }
+
+function editarTarefa(titulo, descricao, id) {
+  const itemEditado = lista_tarefas.find((item) => item.id === id);
+  itemEditado.titulo = titulo;
+  itemEditado.descricao = descricao;
+
+  criaListaTarefas();
+}
+
+
 
 const formulario = document.querySelector("#formulario");
 formulario.addEventListener("submit", (event) => {
